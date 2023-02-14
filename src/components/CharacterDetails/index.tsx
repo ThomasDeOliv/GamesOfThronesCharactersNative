@@ -1,5 +1,6 @@
+import { Character } from "../../models/Character";
+import { DetailsCharacterImage, LoadingText, DetailsCharacterFullName, DetailsCharacterField } from "../../styledComponents";
 import { useEffect, useState } from "react";
-import { Character, DetailsCharacterImage, LoadingText, Title } from "../../styledComponents";
 import { Text } from 'react-native';
 import { useParams } from "react-router-native";
 
@@ -26,10 +27,11 @@ const CharacterDetails: React.FC<{}> = () => {
     if (getSelectedCharacter) {
         return (
             <>
-                <Title>{getSelectedCharacter.fullName}</Title>
+                <DetailsCharacterFullName>{getSelectedCharacter.fullName}</DetailsCharacterFullName>
                 <DetailsCharacterImage source={{ uri: getSelectedCharacter.imageUrl }} />
-                <Text>{getSelectedCharacter.id}</Text>
-                <Text>{getSelectedCharacter.title}</Text>
+                <DetailsCharacterField>Numéro d'identifiant : {getSelectedCharacter.id}</DetailsCharacterField>
+                <DetailsCharacterField>Titre : {getSelectedCharacter.title}</DetailsCharacterField>
+                <DetailsCharacterField>Famille : {getSelectedCharacter.family}</DetailsCharacterField>
             </>
         );
     } else {

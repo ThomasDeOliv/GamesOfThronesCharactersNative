@@ -1,9 +1,10 @@
-import Home from "./src/components/Home";
 import { useEffect, useState } from "react";
 import { NativeRouter, Routes, Route } from "react-router-native";
-import { Character, CustomScrollView } from "./src/styledComponents";
+import { Character } from "./src/models/Character";
+import { CustomScrollView } from "./src/styledComponents";
 import CharacterDetails from "./src/components/CharacterDetails";
 import Header from "./src/components/CustomeHeader";
+import Home from "./src/components/Home";
 
 const AppContent = () => {
 

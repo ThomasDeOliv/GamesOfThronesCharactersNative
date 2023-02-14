@@ -1,16 +1,5 @@
 import styled from 'styled-components/native';
 
-export interface Character {
-    id: number,
-    firstName: string,
-    lastName: string,
-    fullName: string,
-    title: string,
-    family: string,
-    image: string,
-    imageUrl: string
-};
-
 export const CustomHeader = styled.View`
     height: 10%;
     background-color: dodgerblue;
@@ -29,13 +18,10 @@ export const AppTitle = styled.Text`
 export const ReturnHomeButton = styled.TouchableOpacity`
     display:flex;
     border-radius: 50px;
-    background: white;
-    opacity: 0.6;
     margin: 0 0 0 30px;
     width: 50px;
     height: 50px;
     align-items: center;
-    justify-content: space-around;
 `;
 
 export const EmptyElement = styled.View`
@@ -45,9 +31,9 @@ export const EmptyElement = styled.View`
 
 export const ReturnHomeButtonText = styled.Text`
     font-size: 30px;
-    color: black;
+    font-weight: bolder;
+    color: white;
 `;
-
 
 export const CustomScrollView = styled.ScrollView`
     max-height:90%;    
@@ -69,7 +55,7 @@ export const CharacterView = styled.View`
     display: flex;
     flex-direction: row;
     width: 95%;
-    height: 200px
+    height: 200px;
 `;
 
 export const CharacterImage = styled.Image`
@@ -119,14 +105,20 @@ export const LoadingText = styled.Text`
     width: 90%;
 `;
 
-export const DetailsCharacterImage = styled.Image`
-    height: 400px;
-    width: 90%;
-    margin: 10px;
+export const DetailsCharacterFullName = styled.Text`
+    font-size: 50px;
+    font-weight: bolder;
+    margin: 20px auto 0 auto;
 `;
 
-export const Title = styled.Text`
-    font-size: 30px;
-    font-weight: bold;
-    margin: 20px auto 0 auto;
+export const DetailsCharacterImage = styled.Image`
+    height: 500px;
+    width: 500px;
+    margin: 10px auto;
+`;
+
+export const DetailsCharacterField = styled.Text`
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0 auto;
 `;
