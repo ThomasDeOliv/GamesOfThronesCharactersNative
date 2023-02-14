@@ -1,16 +1,15 @@
 import Home from "./src/components/Home";
 import { useEffect, useState } from "react";
-import { NativeRouter, Route, Routes } from "react-router-native";
-import { AppTitle, Character, CustomHeader, CustomScrollView } from "./src";
+import { NativeRouter, Routes, Route } from "react-router-native";
+import { Character, CustomScrollView } from "./src/styledComponents";
 import CharacterDetails from "./src/components/CharacterDetails";
-import { Text } from "react-native";
+import Header from "./src/components/CustomeHeader";
 
-const App = () => {
+const AppContent = () => {
 
   const [getCharacters, setCharacters] = useState<Character[] | undefined>();
 
   useEffect(() => {
-
     const getAllCharacters = async () => {
       const urlToRequest: string | undefined = process.env.API_URL;
       if (urlToRequest) {
@@ -19,24 +18,20 @@ const App = () => {
         setCharacters(charachtersJson);
       }
     };
-
     getAllCharacters();
-
   }, []);
 
   return (
-    <CustomScrollView>
-      <CustomHeader>
-        <AppTitle>GOT Characters</AppTitle>
-      </CustomHeader>
-      <NativeRouter>
+    <NativeRouter>
+      <Header />
+      <CustomScrollView>
         <Routes>
           <Route path="/" element={<Home characters={getCharacters} />} />
           <Route path="/:id" element={<CharacterDetails />} />
         </Routes>
-      </NativeRouter>
-    </CustomScrollView>
+      </CustomScrollView>
+    </NativeRouter>
   );
 };
 
-export default App;
+export default AppContent;

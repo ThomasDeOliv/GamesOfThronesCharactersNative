@@ -11,18 +11,13 @@ export interface Character {
     imageUrl: string
 };
 
-export const CustomScrollView = styled.ScrollView`
-    height: 100%;
-    width: 100%;
-`;
-
 export const CustomHeader = styled.View`
-    height: 67px;
+    height: 10%;
     background-color: dodgerblue;
-    margin-bottom:20px;
     display:flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 `;
 
 export const AppTitle = styled.Text`
@@ -31,11 +26,40 @@ export const AppTitle = styled.Text`
     font-weight: bold;
 `;
 
+export const ReturnHomeButton = styled.TouchableOpacity`
+    display:flex;
+    border-radius: 50px;
+    background: white;
+    opacity: 0.6;
+    margin: 0 0 0 30px;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: space-around;
+`;
+
+export const EmptyElement = styled.View`
+    width: 50px;
+    margin: 0 30px 0 0;
+`;
+
+export const ReturnHomeButtonText = styled.Text`
+    font-size: 30px;
+    color: black;
+`;
+
+
+export const CustomScrollView = styled.ScrollView`
+    max-height:90%;    
+    min-width: 100%;
+    max-width: 100%;
+`;
+
 export const ListPresentation = styled.Text`
     color: black;
     font-size: 20px;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 20px auto 0 auto;
 `;
 
 export const CharacterView = styled.View`
@@ -93,4 +117,16 @@ export const LoadingText = styled.Text`
     font-style: italic;
     font-size: 20px;
     width: 90%;
+`;
+
+export const DetailsCharacterImage = styled.Image`
+    height: 400px;
+    width: 90%;
+    margin: 10px;
+`;
+
+export const Title = styled.Text`
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px auto 0 auto;
 `;

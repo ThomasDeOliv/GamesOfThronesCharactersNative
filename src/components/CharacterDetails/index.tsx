@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { Character, LoadingText } from "../..";
-import { Text, Image, View, Button } from 'react-native';
-import { useNavigate, useParams } from "react-router-native";
+import { Character, DetailsCharacterImage, LoadingText, Title } from "../../styledComponents";
+import { Text } from 'react-native';
+import { useParams } from "react-router-native";
 
 const CharacterDetails: React.FC<{}> = () => {
-
-    const navigate = useNavigate();
 
     const { id } = useParams();
     const [getSelectedCharacter, setSelectedCharacter] = useState<Character | undefined>();
@@ -28,13 +26,10 @@ const CharacterDetails: React.FC<{}> = () => {
     if (getSelectedCharacter) {
         return (
             <>
-                <View>
-                    <Text>{getSelectedCharacter.fullName}</Text>
-                </View>
-                <Image source={{ uri: getSelectedCharacter.imageUrl }} style={{ height: 200, width: 200 }} />
+                <Title>{getSelectedCharacter.fullName}</Title>
+                <DetailsCharacterImage source={{ uri: getSelectedCharacter.imageUrl }} />
                 <Text>{getSelectedCharacter.id}</Text>
                 <Text>{getSelectedCharacter.title}</Text>
-                <Button title="Retour" onPress={() => navigate('/')} />
             </>
         );
     } else {

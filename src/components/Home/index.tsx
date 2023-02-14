@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-native";
-import { Character, CharacterDescription, CharacterImage, CharacterName, CharacterTitle, CharacterView, CustomButton, CustomButtonText, ListPresentation, LoadingText } from "../..";
-import { Text, View } from 'react-native';
+import { Character, CharacterDescription, CharacterImage, CharacterName, CharacterTitle, CharacterView, CustomButton, CustomButtonText, ListPresentation, LoadingText } from "../../styledComponents";
 
 interface HomeProps {
     characters: Array<Character> | undefined

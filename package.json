@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.4",
     "@types/styled-components-react-native": "^5.2.1",
     "expo": "~47.0.12",
     "expo-image-picker": "~14.0.2",
