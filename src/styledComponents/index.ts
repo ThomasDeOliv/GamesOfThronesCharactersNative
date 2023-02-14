@@ -122,3 +122,25 @@ export const DetailsCharacterField = styled.Text`
     font-weight: normal;
     margin: 0 auto;
 `;
+
+export const AddCharacterView = styled.View`
+    padding: 10px;
+    display: flex;
+    align-items:center;
+`;
+
+export const AddCharacterButton = styled.TouchableOpacity`
+    background-color:dodgerblue;
+    height: 40px;
+    width: 50%;
+    display: flex;
+    align-items:center;
+    justify-content: space-around;
+    border-radius: 10px;
+`;
+
+export const AddCharacterButtonText = styled.Text`
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+`;

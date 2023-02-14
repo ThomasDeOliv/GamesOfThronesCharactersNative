@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <CustomHeader>
-            <ReturnHomeButton style={{ opacity: location.pathname === '/' ? 0 : 0.6 }} disabled={location.pathname === '/'} onPress={() => navigate('/')}>
+            <ReturnHomeButton style={{ opacity: location.pathname === '/' ? 0 : 1 }} disabled={location.pathname === '/'} onPress={() => navigate('/')}>
                 <ReturnHomeButtonText>{'←'}</ReturnHomeButtonText>
             </ReturnHomeButton>
             <AppTitle>GOT Characters</AppTitle>

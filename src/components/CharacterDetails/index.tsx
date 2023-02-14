@@ -1,26 +1,28 @@
 import { Character } from "../../models/Character";
 import { DetailsCharacterImage, LoadingText, DetailsCharacterFullName, DetailsCharacterField } from "../../styledComponents";
 import { useEffect, useState } from "react";
-import { Text } from 'react-native';
 import { useParams } from "react-router-native";
 
 const CharacterDetails: React.FC<{}> = () => {
 
     const { id } = useParams();
-    const [getSelectedCharacter, setSelectedCharacter] = useState<Character | undefined>();
+    const [getSelectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
     useEffect(() => {
 
-        const getCharacterDetails = async () => {
+        const getCharacterDetails: () => Promise<Character | null> = async () => {
             const urlToRequest: string | undefined = process.env.API_URL + '/' + id;
             if (urlToRequest) {
                 const response: Response = await fetch(urlToRequest, { method: 'GET' });
-                const charachterJson: Character = await response.json();
-                setSelectedCharacter(charachterJson);
+                const charachter: Character = await response.json();
+                return charachter;
             }
+            return null;
         };
 
-        getCharacterDetails();
+        getCharacterDetails()
+            .then((charachter) => setSelectedCharacter(charachter))
+            .catch(() => setSelectedCharacter(null));
 
     }, [id]);
 

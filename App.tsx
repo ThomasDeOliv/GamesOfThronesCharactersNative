@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { NativeRouter, Routes, Route } from "react-router-native";
 import { Character } from "./src/models/Character";
 import { CustomScrollView } from "./src/styledComponents";
-import CharacterDetails from "./src/components/CharacterDetails";
 import Header from "./src/components/CustomeHeader";
+import AddNewCharacterButton from "./src/components/AddNewCharacterButton";
 import Home from "./src/components/Home";
+import AddNewCharacter from "./src/components/AddNewCharacter";
+import CharacterDetails from "./src/components/CharacterDetails";
 
 const AppContent = () => {
 
@@ -24,13 +26,15 @@ const AppContent = () => {
 
   return (
     <NativeRouter>
-      <Header />
+      <Header />  
       <CustomScrollView>
+        <AddNewCharacterButton/>
         <Routes>
           <Route path="/" element={<Home characters={getCharacters} />} />
+          <Route path="/add" element={<AddNewCharacter />} />
           <Route path="/:id" element={<CharacterDetails />} />
         </Routes>
-      </CustomScrollView>
+      </CustomScrollView>   
     </NativeRouter>
   );
 };
