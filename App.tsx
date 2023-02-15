@@ -7,35 +7,37 @@ import AddNewCharacterButton from "./src/components/AddNewCharacterButton";
 import Home from "./src/components/Home";
 import AddNewCharacter from "./src/components/AddNewCharacter";
 import CharacterDetails from "./src/components/CharacterDetails";
+import { Provider } from "react-redux";
+import store from "./src/store";
+import { getAllCharacters } from "./src/store/actions";
 
 const AppContent = () => {
 
   const [getCharacters, setCharacters] = useState<Character[] | undefined>();
 
   useEffect(() => {
-    const getAllCharacters = async () => {
-      const urlToRequest: string | undefined = process.env.API_URL;
-      if (urlToRequest) {
-        const response: Response = await fetch(urlToRequest, { method: 'GET' });
-        const charachtersJson: Character[] = await response.json();
-        setCharacters(charachtersJson);
-      }
-    };
-    getAllCharacters();
+    getAllCharacters()
+      .then((c) => {
+        if (c != null) {
+          setCharacters(c);
+        }
+      });
   }, []);
 
   return (
-    <NativeRouter>
-      <Header />  
-      <CustomScrollView>
-        <AddNewCharacterButton/>
-        <Routes>
-          <Route path="/" element={<Home characters={getCharacters} />} />
-          <Route path="/add" element={<AddNewCharacter />} />
-          <Route path="/:id" element={<CharacterDetails />} />
-        </Routes>
-      </CustomScrollView>   
-    </NativeRouter>
+    <Provider store={store}>
+      <NativeRouter>
+        <Header />
+        <CustomScrollView>
+          <AddNewCharacterButton />
+          <Routes>
+            <Route path="/" element={<Home characters={getCharacters} />} />
+            <Route path="/add" element={<AddNewCharacter />} />
+            <Route path="/:id" element={<CharacterDetails />} />
+          </Routes>
+        </CustomScrollView>
+      </NativeRouter>
+    </Provider>
   );
 };
 

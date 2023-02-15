@@ -1,4 +1,5 @@
 import { Character } from "../../models/Character";
+import { getCharacterDetails } from "../../store/actions";
 import { DetailsCharacterImage, LoadingText, DetailsCharacterFullName, DetailsCharacterField } from "../../styledComponents";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-native";
@@ -9,18 +10,7 @@ const CharacterDetails: React.FC<{}> = () => {
     const [getSelectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
     useEffect(() => {
-
-        const getCharacterDetails: () => Promise<Character | null> = async () => {
-            const urlToRequest: string | undefined = process.env.API_URL + '/' + id;
-            if (urlToRequest) {
-                const response: Response = await fetch(urlToRequest, { method: 'GET' });
-                const charachter: Character = await response.json();
-                return charachter;
-            }
-            return null;
-        };
-
-        getCharacterDetails()
+        getCharacterDetails(id)
             .then((charachter) => setSelectedCharacter(charachter))
             .catch(() => setSelectedCharacter(null));
 
