@@ -1,21 +1,59 @@
 import { useNavigate } from "react-router-native";
-import { Character } from "../../models/Character";
 import { CharacterDescription, CharacterImage, CharacterName, CharacterTitle, CharacterView, CustomButton, CustomButtonText, ListPresentation, LoadingText } from "../../styledComponents";
+import { useEffect } from "react";
+import { Character } from "../../models/Character";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { loadCharacters } from "../../store/features";
+import { Alert } from "react-native";
 
-interface HomeProps {
-    characters: Array<Character> | undefined
-}
+const Home = () => {
 
-const Home: React.FC<HomeProps> = ({ characters }) => {
-
+    const dispatch = useAppDispatch();
+    const characters = useAppSelector(state => state.characterReducer.characters);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const getAllCharacters = (): Promise<Array<Character>> => new Promise<Array<Character>>(async (resolve, reject) => {
+            const urlToRequest: string | undefined = process.env.API_URL;
+            try {
+                if (urlToRequest) {
+                    const headers: RequestInit = {
+                        method: 'GET',
+                    };
+                    const response: Response = await fetch(urlToRequest, headers);
+                    if (response.ok) {
+                        const charachters: Character[] = await response.json();
+                        resolve(charachters);
+                    } else {
+                        throw new Error("Bad response : " + response.status);
+                    }
+                } else {
+                    throw new Error("Invalid API URL");
+                }
+            } catch (error) {
+                if (error instanceof Error) {
+                    reject(error.message);
+                }
+                else {
+                    reject("Unknown error");
+                }
+            }
+        });
+
+        if(characters.length === 0) {
+            getAllCharacters()
+            .then(list => dispatch(loadCharacters(list)))
+            .catch((e) => Alert.alert(e));
+        }
+
+    }, [characters]);
 
     if (characters) {
         return (
             <>
                 <ListPresentation>Liste des personnages</ListPresentation>
-                {characters.map((c, index) =>
-                    <CharacterView key={index}>
+                {characters.map((c) =>
+                    <CharacterView key={c.id}>
                         <CharacterImage source={{ uri: c.imageUrl }} />
                         <CharacterDescription>
                             <CharacterName>{c.fullName}</CharacterName>

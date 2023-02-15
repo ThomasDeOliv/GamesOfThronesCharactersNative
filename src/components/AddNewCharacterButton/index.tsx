@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-native";
 import { AddCharacterButton, AddCharacterButtonText, AddCharacterView } from "../../styledComponents";
 
-const AddNewCharacterButton:React.FC<{}> = () => {
+const AddNewCharacterButton = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
