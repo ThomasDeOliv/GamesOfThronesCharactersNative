@@ -123,13 +123,13 @@ export const DetailsCharacterField = styled.Text`
     margin: 0 auto;
 `;
 
-export const AddCharacterView = styled.View`
+export const UpdateCharacterView = styled.View`
     padding: 10px;
     display: flex;
     align-items:center;
 `;
 
-export const AddCharacterButton = styled.TouchableOpacity`
+export const UpdateCharacterButton = styled.TouchableOpacity`
     background-color:dodgerblue;
     height: 40px;
     width: 50%;
@@ -139,7 +139,7 @@ export const AddCharacterButton = styled.TouchableOpacity`
     border-radius: 10px;
 `;
 
-export const AddCharacterButtonText = styled.Text`
+export const UpdateCharacterButtonText = styled.Text`
     color: white;
     font-size: 20px;
     font-weight: bold;

@@ -15,31 +15,32 @@ export const CharacterSlice = createSlice({
     name: "character",
     initialState,
     reducers: {
-        addCharacter: (state, action: PayloadAction<Character>) => {
-            state.characters.push({
-                id: action.payload.id,
-                lastName: action.payload.lastName,
-                firstName: action.payload.firstName,
-                fullName: action.payload.fullName,
-                family: action.payload.family,
-                image: action.payload.image,
-                imageUrl: action.payload.imageUrl,
-                title: action.payload.title
-            })
+        updateCharacter: (state, action: PayloadAction<Character>) => {
+            state.characters.map(c => {
+                if (c.id == action.payload.id) {
+                    c.lastName = action.payload.lastName;
+                    c.firstName = action.payload.firstName;
+                    c.fullName = action.payload.fullName;
+                    c.family = action.payload.family;
+                    c.title = action.payload.title;
+                    c.image = action.payload.image;
+                    c.imageUrl = action.payload.imageUrl;
+                }
+            });
         },
-        selectCharacter: (state, action: PayloadAction<{id: number}>) => {
+        selectCharacter: (state, action: PayloadAction<{ id: number }>) => {
             const query = state.characters.find(c => c.id === action.payload.id);
 
-            if(query) {
+            if (query) {
                 state.selectedCharacter = query;
             } else {
                 state.selectedCharacter = null;
             }
         },
-        loadCharacters: (state, action:PayloadAction<Character[]>) => {
+        loadCharacters: (state, action: PayloadAction<Character[]>) => {
             action.payload.map(c => {
                 const check = state.characters.find(character => character.id === c.id);
-                if(!check) {
+                if (!check) {
                     state.characters.push(c);
                 }
             });
@@ -48,4 +49,4 @@ export const CharacterSlice = createSlice({
 });
 
 export default CharacterSlice.reducer;
-export const { addCharacter, selectCharacter, loadCharacters } = CharacterSlice.actions;
+export const { updateCharacter, selectCharacter, loadCharacters } = CharacterSlice.actions;
