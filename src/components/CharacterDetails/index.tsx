@@ -1,30 +1,41 @@
-import { Character } from "../../models/Character";
-import { getCharacterDetails } from "../../store/actions";
-import { DetailsCharacterImage, LoadingText, DetailsCharacterFullName, DetailsCharacterField } from "../../styledComponents";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-native";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { DetailsCharacterImage, LoadingText, DetailsCharacterFullName, DetailsCharacterField, UpdateCharacterView, UpdateCharacterButton, UpdateCharacterButtonText } from "../../styledComponents";
+import { useNavigate, useParams } from "react-router-native";
+import { selectCharacter } from "../../store/features";
+import { View } from "react-native";
 
 const CharacterDetails: React.FC<{}> = () => {
 
     const { id } = useParams();
-    const [getSelectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const character = useAppSelector(state => state.characterReducer.selectedCharacter);
 
     useEffect(() => {
-        getCharacterDetails(id)
-            .then((charachter) => setSelectedCharacter(charachter))
-            .catch(() => setSelectedCharacter(null));
-
+        if (id) {
+            if (!isNaN(parseInt(id))) {
+                dispatch(selectCharacter({ id: parseInt(id) }));
+            }
+        }
     }, [id]);
 
-    if (getSelectedCharacter) {
+    if (character) {
         return (
-            <>
-                <DetailsCharacterFullName>{getSelectedCharacter.fullName}</DetailsCharacterFullName>
-                <DetailsCharacterImage source={{ uri: getSelectedCharacter.imageUrl }} />
-                <DetailsCharacterField>Numéro d'identifiant : {getSelectedCharacter.id}</DetailsCharacterField>
-                <DetailsCharacterField>Titre : {getSelectedCharacter.title}</DetailsCharacterField>
-                <DetailsCharacterField>Famille : {getSelectedCharacter.family}</DetailsCharacterField>
-            </>
+            <View>
+                <View>
+                    <DetailsCharacterFullName>{character.fullName}</DetailsCharacterFullName>
+                    <DetailsCharacterImage source={{ uri: character.imageUrl }} />
+                    <DetailsCharacterField>Numéro d'identifiant : {character.id}</DetailsCharacterField>
+                    <DetailsCharacterField>Titre : {character.title}</DetailsCharacterField>
+                    <DetailsCharacterField>Famille : {character.family}</DetailsCharacterField>
+                </View>
+                <UpdateCharacterView>
+                    <UpdateCharacterButton onPress={() => navigate('/update')}>
+                        <UpdateCharacterButtonText>Modifier</UpdateCharacterButtonText>
+                    </UpdateCharacterButton>
+                </UpdateCharacterView>
+            </View>
         );
     } else {
         return (
